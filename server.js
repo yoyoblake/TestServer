@@ -142,7 +142,7 @@ app.get('/api/shell', function (req, res){
         var element = React.createElement(Email, {
             count:test_record.result_count,
             timeStamp:test_record.timeStamp,
-            HOST_URL: local_IP + ":3000",
+            HOST_URL: local_IP + ":3030",
             env:test_record.env,
             build_version: test_record.build_version
         });
@@ -159,7 +159,7 @@ function run(){
 
 }
 /*****************************************************************/
-var server = app.listen(3000, function () {
+var server = app.listen(3030, function () {
     var host = server.address().address
     var port = server.address().port
     console.log("Example app listening at http://%s:%s", host, port)

@@ -26,7 +26,7 @@ var HTMLWebpackPlugin_Config= new HtmlWebpackPlugin({
 var DefinePlugin = new webpack.DefinePlugin({
   'process.env':{
     'NODE_ENV': JSON.stringify('development'),
-    'HOST_URL': JSON.stringify('http://' + ip + ':3000'),
+    'HOST_URL': JSON.stringify('http://' + ip + ':3030'),
     'FILE_SERVER_URL':JSON.stringify('http://' + ip + ':8000')
   }
 });

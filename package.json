@@ -5,7 +5,13 @@
   "main": "express_app.js",
   "scripts": {
     "build": "webpack",
-    "start": "webpack && node server.js"
+    "buildfull": "npm i && npm run build",
+    "buildClean": "npm run clean && npm run build",
+    "start": "npm run build && node server.js",
+    "startclean": "npm run clean && npm run build && node server.js",
+    "startcleanfull": "npm run cleanfull && npm run buildfull && node server.js",
+    "clean": "rm -rf dist",
+    "cleanfull": "npm run clean && rm -rf node_modules"
   },
   "contributors": [
     "Blake Kuver",

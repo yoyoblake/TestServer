@@ -68,7 +68,7 @@ app.get('/test_record', function(req, res){
     console.log("request received");
 })
 
-var server = app.listen(3000, function () {
+var server = app.listen(3030, function () {
    var host = server.address().address
    var port = server.address().port
 
