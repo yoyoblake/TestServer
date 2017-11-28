@@ -1,0 +1,37 @@
+html {
+  box-sizing: border-box;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+.config_section{
+    margin: 0px 0px 30px 0px;
+    width: 90%;
+    padding: 5px 10px 20px 10px;
+    text-align: center;
+    background-color: #c9d7ed;
+    border-radius: 10px;
+}
+
+.run_section, h2{
+    margin: 0px 0px 30px 0px;
+    width: 90%;
+    padding: 5px 10px 20px 10px;
+    text-align: center;
+}
+
+label{
+    padding: 0px 10px 0px 10px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.run_section button{
+    margin: 0px 20px 0px 20px;
+    height:35px;
+    width:100px;
+}

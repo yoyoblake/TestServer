@@ -1,0 +1,21 @@
+html {
+  box-sizing: border-box;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+.center{
+    text-align: center;
+}
+
+table, tr, td, th{
+    margin: 20px 20px 24px 20px;
+    border: 1px solid #c4c9ff;
+    border-collapse: collapse;
+}
+table{
+    width: 100%;
+}

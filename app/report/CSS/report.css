@@ -1,0 +1,35 @@
+
+table, tr, th, td {
+    margin: 0 20px 24px 20px;
+    border: 1px solid #c4c9ff;
+    border-collapse: collapse;
+    padding: 5px;
+}
+
+table{
+    width:90%;
+    vertical-align: right;
+}
+
+#th_head{
+    width: 28%;
+}
+
+#th_pass, #th_fail, #th_skip, #th_total{
+    width: 18%;
+}
+
+#filter{
+    text-align: center;
+    margin: auto;
+    padding: 5px;
+}
+
+h2{
+    text-align: center;
+}
+
+li{
+    margin: 5px;
+    padding: 5px;
+}

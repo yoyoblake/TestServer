@@ -1,0 +1,52 @@
+{
+    "timeStamp": "11-12-2014_10:00:16",
+    "test": {
+        "adcolony": {
+            "default": {
+                "AppViewPageTests": {
+                    "test_user_can_navigate_to_compass()#nonadmin": "Skip",
+                    "test_user_can_navigate_to_compass()#admin": "Skip"
+                },
+                "LoginPageTests": {
+                    "test_user_can_login()#nonadmin": "Skip",
+                    "test_user_can_login()#admin": "Skip"
+                },
+                "AppsIndexPageTests": {
+                    "test_user_can_navigate_to_view_page()#nonadmin-view": "Skip",
+                    "test_user_can_navigate_to_create_page()#admin-create": "Skip",
+                    "test_user_can_navigate_to_view_page()#admin-view": "Skip",
+                    "test_user_can_navigate_to_create_page()#nonadmin-create": "Skip"
+                },
+                "HomePageTests": {
+                    "test_user_can_load_homepage_properly()#admin": "Skip",
+                    "test_user_can_load_homepage_properly()#nonadmin": "Skip",
+                    "test_SpendTitle_displayed()#admin": "Skip",
+                    "test_SpendTitle_displayed()#nonadmin": "Skip"
+                },
+                "AppCreatePageTests": {
+                    "test_user_can_cancel_creating_a_new_app()#nonadmin": "Skip",
+                    "test_user_can_cancel_creating_a_new_app()#admin": "Skip",
+                    "test_nonadmin_can_create_a_new_app()#nonadmin": "Skip",
+                    "test_admin_can_create_a_new_app()#admin": "Skip"
+                },
+                "AppEditPageTests": {
+                    "test_admin_can_enable_yvolver_checkbox()#admin": "Skip",
+                    "test_user_can_edit_app_name()#admin": "Skip",
+                    "test_admin_can_cancel_editing_app()#admin": "Skip",
+                    "test_nonadmin_does_not_have_access_to_enable_yvolver_checkbox()#nonadmin": "Skip",
+                    "test_user_can_edit_app_name()#nonadmin": "Skip"
+                }
+            }
+        }
+    },
+    "report_path": "/Users/tempuser/Desktop/workspace/compass_tests/YvolverPortalTests",
+    "result_count": {
+        "adcolony": {
+            "default": {
+                "Pass": 0,
+                "Skip": 21,
+                "Fail": 0
+            }
+        }
+    }
+}

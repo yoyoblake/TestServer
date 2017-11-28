@@ -1,0 +1,51 @@
+.left_middle{
+    float: left;
+    width: 75%;
+}
+
+.left_side{
+    float: left;
+    width: 10%;
+}
+
+.center{
+    margin: auto;
+    width: 100%;
+}
+
+img{
+    float: left;
+    height: auto;
+    width: auto;
+    max-height: 75px;
+}
+
+header, footer {
+    clear: both;
+    margin: 0 20px 24px 20px;
+    padding: 1em;
+    color: white;
+    background-color: #186ef7;
+    text-align: center;
+}
+
+h1{
+    font-weight: bold;
+    padding: 2pt;
+    text-align: center;
+}
+
+nav {
+    float: left;
+    width: 15%;
+    margin: 0 20px 24px 20px;
+    border: 2px solid white;
+    background-color: #81aff9;
+    border-radius: 10px;
+    left: 20px;
+}
+
+nav li{
+    margin: 5px;
+    padding: 5px;
+}
