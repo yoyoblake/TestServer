@@ -1,4 +1,5 @@
 {
+    "report_path":"/AutomationReports",
     "testSuite_path":"/Users/Shared/Jenkins/Home/workspace/Automation/YvolverPortalTests",
     "browser_tier":"browser",
     "browser_list":"chrome",

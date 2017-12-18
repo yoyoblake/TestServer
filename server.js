@@ -19,6 +19,7 @@ app.use(fileUpload());
 /************ Shared Varaibles of the Server **************/
 //read configure.json
 var configJson = JSON.parse(fs.readFileSync('./configure.json', 'utf8'));
+var reportPath = configJson.report_path;
 var testSuite_path = configJson.testSuite_path;
 var local_IP = "http://" + require('ip').address();
 var file_url = local_IP + ':8000';
@@ -29,12 +30,13 @@ var browser_list = configJson.browser_list; //set by /api/config_save, feed to /
 var tier_list = configJson.tier_list; //set by /api/config_save, feed to /api/shell
 /**********************************************************/
 console.log("Test Suite Path is -> " + testSuite_path);
+console.log("Report Path is -> " + reportPath);
 console.log("Local IP address is -> " + local_IP);
 
 // Create a node-static server instance to serve the './public' folder
 var static = require('node-static');
-var folder = new static.Server(testSuite_path + '/HTML');
-app.use(express.static(testSuite_path  + '/HTML'));
+var folder = new static.Server(reportPath + '/HTML');
+app.use(express.static(reportPath  + '/HTML'));
 require('http').createServer(function (request, response) {
     request.addListener('end', function () {
         folder.serve(request, response);
@@ -48,7 +50,7 @@ app.get('/jenkins', function(req, res){res.redirect(jenkins_url);});
 
 app.get('/report_:fileName', function(req, res){
     var fileName = req.params.fileName;
-    test_record = JSON.parse(fs.readFileSync(testSuite_path +
+    test_record = JSON.parse(fs.readFileSync(reportPath +
         '/HTML/' + fileName, 'utf8'));
     test_record = sortJson(test_record);
     res.sendFile(__dirname + "/dist/report.html");
@@ -62,7 +64,7 @@ app.get('/config_and_run', function(req, res){
 /***************************** API *******************************/
 app.get('/reportHub', function (req, res) {
     var fileSearching = require('./modules/fileSearching');
-    fileSearching.fileSearching(testSuite_path + '/HTML', '.json').then(function(dir_data){
+    fileSearching.fileSearching(reportPath + '/HTML', '.json').then(function(dir_data){
         res.json(dir_data);
     });
 })
@@ -92,7 +94,7 @@ app.post('/api/uploadSuiteXML', function(req, res){
     }
     console.log(sampleFile.extension);
 
-    sampleFile.mv(testSuite_path + '/' + req.query.suite + '.xml', function(err) {
+    sampleFile.mv(reportPath + '/' + req.query.suite + '.xml', function(err) {
         if (err) {
             res.status(500).send(err);
         }
@@ -105,7 +107,7 @@ app.post('/api/uploadSuiteXML', function(req, res){
 app.post('/api/config_save', bodyParser.json(), function(req, res){
     //write params to Local Java Test Project
     var propert_parser = require('properties-parser');
-    var editor = propert_parser.createEditor(testSuite_path + '/src/utils/config.properties');
+    var editor = propert_parser.createEditor(reportPath + '/src/utils/config.properties');
     editor.set("env", req.body.env);
     editor.set("build_version", req.body.build_version);
     editor.save(function(err){
@@ -130,13 +132,15 @@ app.get('/api/shell', function (req, res){
     //console.log('command is ' + command);
     res.send('Success');
     require('shelljs/global');
+    const fs = require('fs-extra');
     cd(testSuite_path);
     echo(pwd());
     //exec(command);
     fileSearching.fileSearching(testSuite_path + '/HTML', '.json').then(function(dir_data){
         var fileName = dir_data.lastFile;
         console.log("File been retrieved -> " + fileName);
-        var json_file = JSON.parse(fs.readFileSync(testSuite_path +
+        fs.copySync(testSuite_path + '/HTML', reportPath + '/HTML', {overwrite: true});
+        var json_file = JSON.parse(fs.readFileSync(reportPath +
             '/HTML/' + fileName, 'utf8'));
         test_record = sortJson(json_file);
         var element = React.createElement(Email, {
