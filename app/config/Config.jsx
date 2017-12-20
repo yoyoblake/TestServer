@@ -7,15 +7,15 @@ class Config extends React.Component{
     render(){
         function send(){
             var env_droplist = document.getElementById('env');
-            var browser_tier = document.getElementById('browser_tier');
-            var browser_list = document.getElementById('browser_list');
-            var tier_list = document.getElementById('tier_list');
+            var browserTier = document.getElementById('browserTier');
+            var browserList = document.getElementById('browserList');
+            var tierList = document.getElementById('tierList');
             axios.post('/api/config_save', {
                 build_version: document.getElementById('build_version').value ,
                 env: env_droplist.options[env_droplist.selectedIndex].text,
-                browser_tier: browser_tier.options[browser_tier.selectedIndex].text,
-                browser_list: browser_list.options[browser_list.selectedIndex].text,
-                tier_list: tier_list.options[tier_list.selectedIndex].text
+                browserTier: browserTier.options[browserTier.selectedIndex].text,
+                browserList: browserList.options[browserList.selectedIndex].text,
+                tierList: tierList.options[tierList.selectedIndex].text
             }).then(function (response){
 
             }).catch(function (err){
@@ -36,12 +36,12 @@ class Config extends React.Component{
             //* ToDo: disable the Button until the current execution is done
         }
 
-        var browser_list = <select required id='browser_list'>
+        var browserList = <select required id='browserList'>
                                 <option value="chrome">chrome</option>
                                 <option value="firefox">firefox</option>
                             </select>;
 
-        var tier_list = <select required id='tier_list'>
+        var tierList = <select required id='tierList'>
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -83,14 +83,14 @@ class Config extends React.Component{
                 <section className="config_section">
                     <h3>Running Options</h3>
                     <span>Running on a Browser/a Tier of browsers </span>
-                    <select required id='browser_tier'>
+                    <select required id='browserTier'>
                         <option value="browser">browser</option>
                         <option value="tier">tier</option>
                     </select>
                     <span><br /><br />Select Browser </span>
-                    {browser_list}
+                    {browserList}
                     <span><br /><br />Select Tier </span>
-                    {tier_list}
+                    {tierList}
                 </section>
 
                 <section className="run_section">

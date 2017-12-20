@@ -4,7 +4,7 @@ class Report extends React.Component{
     render(){
         var path = this.props.dirPath + '/';
         console.log(path);
-        var file_url = this.props.file_url + '/';
+        var fileUrl = this.props.fileUrl + '/';
 
         return(
             <html>

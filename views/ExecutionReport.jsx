@@ -12,10 +12,10 @@ class ExecutionReport extends React.Component{
                 </head>
                 <body>
                     <h1>Execution Report</h1>
-                    <h2>Execution Time {this.props.test_record.timeStamp}</h2>
+                    <h2>Execution Time {this.props.testRecord.timeStamp}</h2>
                     <div>
-                        <Summary count={this.props.test_record.result_count}/>
-                        <DetailedList status={this.props.test_record.test}/>
+                        <Summary count={this.props.testRecord.result_count}/>
+                        <DetailedList status={this.props.testRecord.test}/>
                     </div>
                 </body>
 

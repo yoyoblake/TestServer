@@ -1,7 +1,9 @@
 {
-    "report_path":"/AutomationReports",
-    "testSuite_path":"/Users/Shared/Jenkins/Home/workspace/Automation/YvolverPortalTests",
-    "browser_tier":"browser",
-    "browser_list":"chrome",
-    "tier_list": ""
+    "reportPath":"/AutomationReports",
+    "codeCoveragePath":"/Users/Shared/Jenkins/Home/workspace/PortalBuildAutomation/Portal/coverage",
+    "mochaPath":"/Users/Shared/Jenkins/Home/workspace/PortalBuildAutomation/Portal/mochawesome-report",
+    "testSuitePath":"/Users/Shared/Jenkins/Home/workspace/PortalBuildAutomation/Automation/YvolverPortalTests",
+    "browserTier":"browser",
+    "browserList":"chrome",
+    "tierList": ""
 }

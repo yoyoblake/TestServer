@@ -40,7 +40,7 @@ class Table_Methods extends React.Component{
 /** Style Block end **/
 
         for(var method in methods){
-            var report_path = this.props.report_path;
+            var reportPath = this.props.reportPath;
             //determine style of td
             var td_style = {textAlign:'center'};
             var a_style = {color:'blue'};
@@ -57,7 +57,7 @@ class Table_Methods extends React.Component{
                     <td style={td_style}>
                         {(methods[method]=='Skip')?
                             (<a>{methods[method]}</a>):
-                            (<a href={report_path} target="_blank">{methods[method]}</a>)
+                            (<a href={reportPath} target="_blank">{methods[method]}</a>)
                         }
                     </td>
                 </tr>

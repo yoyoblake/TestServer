@@ -5,6 +5,8 @@ class TestInfo extends React.Component{
         return(
             <div className="center">
                 <h4>Execution Time : {this.props.testinfo.timeStamp}</h4>
+                <h4>Code Coverage : {this.props.testinfo.timeStamp}</h4>
+                <h4>Unit Tests : {this.props.testinfo.timeStamp}</h4>
                 <h4>Environment : {this.props.testinfo.env}</h4>
                 <h4>Build Version : {this.props.testinfo.build_version}</h4>
             </div>

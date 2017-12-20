@@ -19,19 +19,21 @@ app.use(fileUpload());
 /************ Shared Varaibles of the Server **************/
 //read configure.json
 var configJson = JSON.parse(fs.readFileSync('./configure.json', 'utf8'));
-var reportPath = configJson.report_path;
-var testSuite_path = configJson.testSuite_path;
-var local_IP = "http://" + require('ip').address();
-var file_url = local_IP + ':8000';
-var jenkins_url = local_IP + ':8080';
-var test_record; //contains the instance of test json file
-var browser_tier = configJson.browser_tier; //set by /api/config_save, feed to /api/shell
-var browser_list = configJson.browser_list; //set by /api/config_save, feed to /api/shell
-var tier_list = configJson.tier_list; //set by /api/config_save, feed to /api/shell
+var reportPath = configJson.reportPath;
+var testSuitePath = configJson.testSuitePath;
+var codeCoveragePath = configJson.codeCoveragePath;
+var mochaPath = configJson.mochaPath;
+var localIP = "http://" + require('ip').address();
+var fileUrl = localIP + ':8000';
+var jenkinsUrl = localIP + ':8080';
+var testRecord; //contains the instance of test json file
+var browserTier = configJson.browserTier; //set by /api/config_save, feed to /api/shell
+var browserList = configJson.browserList; //set by /api/config_save, feed to /api/shell
+var tierList = configJson.tierList; //set by /api/config_save, feed to /api/shell
 /**********************************************************/
-console.log("Test Suite Path is -> " + testSuite_path);
+console.log("Test Suite Path is -> " + testSuitePath);
 console.log("Report Path is -> " + reportPath);
-console.log("Local IP address is -> " + local_IP);
+console.log("Local IP address is -> " + localIP);
 
 // Create a node-static server instance to serve the './public' folder
 var static = require('node-static');
@@ -46,13 +48,13 @@ require('http').createServer(function (request, response) {
 /**************************** Routes *****************************/
 app.get('/', function(req, res){res.sendFile(__dirname + "/dist/index.html");})
 
-app.get('/jenkins', function(req, res){res.redirect(jenkins_url);});
+app.get('/jenkins', function(req, res){res.redirect(jenkinsUrl);});
 
 app.get('/report_:fileName', function(req, res){
     var fileName = req.params.fileName;
-    test_record = JSON.parse(fs.readFileSync(reportPath +
+    testRecord = JSON.parse(fs.readFileSync(reportPath +
         '/HTML/' + fileName, 'utf8'));
-    test_record = sortJson(test_record);
+    testRecord = sortJson(testRecord);
     res.sendFile(__dirname + "/dist/report.html");
 });
 
@@ -69,9 +71,9 @@ app.get('/reportHub', function (req, res) {
     });
 })
 
-app.use('/test_record', require('cors')());
-app.get('/test_record', function(req, res){
-    res.json(test_record);
+app.use('/testRecord', require('cors')());
+app.get('/testRecord', function(req, res){
+    res.json(testRecord);
 })
 
 app.get('/api/mail', function(req, res){
@@ -116,9 +118,9 @@ app.post('/api/config_save', bodyParser.json(), function(req, res){
     });
 
     //Update the Server params
-    browser_tier = req.body.browser_tier;
-    browser_list = req.body.browser_list;
-    tier_list = req.body.tier_list;
+    browserTier = req.body.browserTier;
+    browserList = req.body.browserList;
+    tierList = req.body.tierList;
     //ToDo Write params into Config.Json
 
     res.send("Success");
@@ -128,30 +130,37 @@ app.get('/api/shell', function (req, res){
     var fileSearching = require('./modules/fileSearching.js');
     var mail = require('./modules/mail.js');
     var Email = require('./app/Email.jsx');
-    //var command = "./selenium_tests " + browser_tier + ' ' + (browser_tier=='browser'? browser_list: tier_list);
+    //var command = "./selenium_tests " + browserTier + ' ' + (browserTier=='browser'? browserList: tierList);
     //console.log('command is ' + command);
     res.send('Success');
     require('shelljs/global');
     const fs = require('fs-extra');
-    cd(testSuite_path);
+    cd(testSuitePath);
     echo(pwd());
     //exec(command);
-    fileSearching.fileSearching(testSuite_path + '/HTML', '.json').then(function(dir_data){
+    fileSearching.fileSearching(testSuitePath + '/HTML', '.json').then(function(dir_data){
         var fileName = dir_data.lastFile;
+        var resultFolder = fileName.split('.')[0].replace(':', '-').replace(':', '-');
+        fs.copySync(testSuitePath + '/HTML', reportPath + '/HTML', {overwrite: true});
         console.log("File been retrieved -> " + fileName);
-        fs.copySync(testSuite_path + '/HTML', reportPath + '/HTML', {overwrite: true});
+        console.log("CC Path: " + codeCoveragePath);
+        console.log("CC Report: " + reportPath + '/HTML/' + resultFolder + "/CodeCoverage");
+        console.log("UT Path: " + mochaPath);
+        console.log("UT Report: " + reportPath + '/HTML/' + resultFolder + "/UnitTests");
+        fs.copySync(codeCoveragePath, reportPath + '/HTML/' + resultFolder + "/CodeCoverage", {overwrite: true});
+        fs.copySync(mochaPath, reportPath + '/HTML/' + resultFolder + "/UnitTests", {overwrite: true});   
         var json_file = JSON.parse(fs.readFileSync(reportPath +
             '/HTML/' + fileName, 'utf8'));
-        test_record = sortJson(json_file);
+        testRecord = sortJson(json_file);
         var element = React.createElement(Email, {
-            count:test_record.result_count,
-            timeStamp:test_record.timeStamp,
-            HOST_URL: local_IP + ":3030",
-            env:test_record.env,
-            build_version: test_record.build_version
+            count:testRecord.result_count,
+            timeStamp:testRecord.timeStamp,
+            HOST_URL: localIP + ":3030",
+            env:testRecord.env,
+            build_version: testRecord.build_version
         });
         var html = ReactDOMServer.renderToString(element);
-        mail.sendEmail('Execution ' + test_record.timeStamp, html);
+        mail.sendEmail('Execution ' + testRecord.timeStamp, html);
         res.sebd('Success');
     }, function(err){
         console.log("Error happend -> " + err);

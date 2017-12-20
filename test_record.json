@@ -39,7 +39,7 @@
             }
         }
     },
-    "report_path": "/AutomationReports",
+    "reportPath": "/AutomationReports",
     "result_count": {
         "adcolony": {
             "default": {

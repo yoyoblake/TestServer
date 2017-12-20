@@ -20,7 +20,9 @@ class ReportList extends React.Component{
         for(var file in files_array){
             indents.push(
                 <tr style={tr_center_style} key={file}>
-                    <td><a href={'/report_' + file}>{file.split('.')[0]}<br /></a></td>
+                    <td><a href={'/report_' + file}>{file.split('.')[0]}<br/></a></td>
+                    <td><a href={file.split('.')[0].replace(':', '-').replace(':', '-') + '/CodeCoverage/index.html'}>Code Coverage<br/></a></td>
+                    <td><a href={file.split('.')[0].replace(':', '-').replace(':', '-') + '/UnitTests/mochawesome.html'}>Unit Tests<br/></a></td>
                     <td>{files_array[file].env}</td>
                     <td>{files_array[file].build_version}</td>
                     <td style={td_pass_style}>
@@ -48,6 +50,8 @@ class ReportList extends React.Component{
                 <tbody>
                     <tr style={tr_head_style}>
                         <td>Execution Time</td>
+                        <td>Code Coverage</td>
+                        <td>Unit Tests</td>
                         <td>Environment</td>
                         <td>BuildVersion</td>
                         <td>Pass</td>

@@ -15,13 +15,13 @@ var TestInfo = require('./TestInfo.jsx');
 var Content = React.createClass({
     getInitialState: function(){
         return {
-            test_record : "Init"
+            testRecord : "Init"
         }
     },
 
     setData: function(result){
         this.setState({
-            test_record: result
+            testRecord: result
         })
     },
 
@@ -29,7 +29,7 @@ var Content = React.createClass({
         $.ajax({
             type: "Get",
             dataType : "json",
-            url: HOST_URL + '/test_record',
+            url: HOST_URL + '/testRecord',
             success: function(response){
                 this.setData(response);
             }.bind(this)
@@ -47,16 +47,16 @@ var Content = React.createClass({
                 <Headline headline_text="Execution Details"/>
                 <Nav />
                 <section className="left_middle">
-                    <TestInfo testinfo={{timeStamp: this.state.test_record.timeStamp,
-                                        env: this.state.test_record.env,
-                                        build_version: this.state.test_record.build_version}}
+                    <TestInfo testinfo={{timeStamp: this.state.testRecord.timeStamp,
+                                        env: this.state.testRecord.env,
+                                        build_version: this.state.testRecord.build_version}}
                     />
-                    <Summary count={this.state.test_record.result_count}
-                        timeStamp={this.state.test_record.timeStamp}
+                    <Summary count={this.state.testRecord.result_count}
+                        timeStamp={this.state.testRecord.timeStamp}
                         HOST_URL={HOST_URL}
                     />
-                    <DetailedList status={this.state.test_record.test}
-                        timeStamp={this.state.test_record.timeStamp}
+                    <DetailedList status={this.state.testRecord.test}
+                        timeStamp={this.state.testRecord.timeStamp}
                         fileServer_URL={FILE_SERVER_URL}
                     />
                 </section>

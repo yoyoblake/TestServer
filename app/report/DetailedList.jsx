@@ -108,7 +108,7 @@ class DetailedList extends React.Component{
                     class_list.push(
                         <li key={class_attr} className={class_attr} id={className} style={li_class}>Class : {className}
                             <Methods_table methods={status[suite][pack][className]}
-                                report_path={reprot_path}
+                                reportPath={reprot_path}
                                 timeStamp={this.props.timeStamp}
                                 class_attr={class_attr}
                                 filter_array={filter_array}

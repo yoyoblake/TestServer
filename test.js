@@ -16,10 +16,10 @@ app.use(express.static(__dirname  + '/views'));
 app.use(express.static(__dirname  + '/dist'));
 
 var configure = JSON.parse(fs.readFileSync('./configure.json', 'utf8'));
-var testSuite_path = configure.testSuite_path;
-console.log("testSuite_path -> " + testSuite_path);
-var file = new static.Server(testSuite_path + '/HTML');
-app.use(express.static(testSuite_path  + '/HTML'));
+var testSuitePath = configure.testSuitePath;
+console.log("testSuitePath -> " + testSuitePath);
+var file = new static.Server(testSuitePath + '/HTML');
+app.use(express.static(testSuitePath  + '/HTML'));
 
 require('http').createServer(function (request, response) {
     request.addListener('end', function () {
@@ -27,8 +27,8 @@ require('http').createServer(function (request, response) {
     }).resume();
 }).listen(8000);
 
-var test_record = JSON.parse(fs.readFileSync(testSuite_path + '/test_record.json', 'utf8'));
-test_record = sortJson(test_record);
+var testRecord = JSON.parse(fs.readFileSync(testSuitePath + '/testRecord.json', 'utf8'));
+testRecord = sortJson(testRecord);
 /*
 for(var suite in status){
     console.log("Suite -> " + suite);
@@ -46,7 +46,7 @@ for(var suite in status){
     }
 }*/
 
-var element = React.createElement(Summary, {status:test_record.test});
+var element = React.createElement(Summary, {status:testRecord.test});
 var html = ReactDOMServer.renderToString(element);
 
 var mail = require('./modules/mail.js', { exec: false});
@@ -54,7 +54,7 @@ var mail = require('./modules/mail.js', { exec: false});
 
 
 app.get('/summary', function(req, res){
-    res.render('ExecutionReport',  {test_record:test_record});
+    res.render('ExecutionReport',  {testRecord:testRecord});
     //res.send("Text");
 })
 
@@ -62,9 +62,9 @@ app.get('/aa', function(req, res){
     res.sendFile(__dirname + "/dist/report.html");
 })
 
-app.use('/test_record', require('cors')());
-app.get('/test_record', function(req, res){
-    res.json(test_record);
+app.use('/testRecord', require('cors')());
+app.get('/testRecord', function(req, res){
+    res.json(testRecord);
     console.log("request received");
 })
 
