@@ -1,8 +1,8 @@
 {
-    "reportPath":"/AutomationReports",
-    "codeCoveragePath":"/Users/Shared/Jenkins/Home/workspace/PortalBuildAutomation/Portal/coverage",
-    "mochaPath":"/Users/Shared/Jenkins/Home/workspace/PortalBuildAutomation/Portal/mochawesome-report",
-    "testSuitePath":"/Users/Shared/Jenkins/Home/workspace/PortalBuildAutomation/Automation/YvolverPortalTests",
+    "reportPath":"/Users/blakekuver/Documents/Shared",
+    "codeCoveragePath":"/Users/blakekuver/Desktop/AdColonyWS/adc2-ui-loggly/coverage",
+    "mochaPath":"/Users/blakekuver/Desktop/AdColonyWS/adc2-ui-loggly/mochawesome-report",
+    "testSuitePath":"/Users/blakekuver/Desktop/AdColonyWS/compass_tests/YvolverPortalTests",
     "browserTier":"browser",
     "browserList":"chrome",
     "tierList": ""

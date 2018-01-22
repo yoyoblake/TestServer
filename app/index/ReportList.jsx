@@ -27,17 +27,17 @@ class ReportList extends React.Component{
                     <td>{files_array[file].build_version}</td>
                     <td style={td_pass_style}>
                         <a style={a_pass_style} href={'/report_'+file+'?keys=Pass'}>
-                            {files_array[file].test_overal_stat.Pass}
+                            {files_array[file].testOverallStat.Pass}
                         </a>
                     </td>
                     <td style={td_fail_style}>
                         <a style={a_fail_style} href={'/report_'+file+'?keys=Fail'}>
-                            {files_array[file].test_overal_stat.Fail}
+                            {files_array[file].testOverallStat.Fail}
                         </a>
                     </td>
                     <td style={td_skip_style}>
                         <a style={a_skip_style} href={'/report_'+file+'?keys=Skip'}>
-                            {files_array[file].test_overal_stat.Skip}
+                            {files_array[file].testOverallStat.Skip}
                         </a>
                     </td>
                 </tr>

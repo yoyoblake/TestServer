@@ -66,8 +66,8 @@ app.get('/config_and_run', function(req, res){
 /***************************** API *******************************/
 app.get('/reportHub', function (req, res) {
     var fileSearching = require('./modules/fileSearching');
-    fileSearching.fileSearching(reportPath + '/HTML', '.json').then(function(dir_data){
-        res.json(dir_data);
+    fileSearching.fileSearching(reportPath + '/HTML', '.json').then(function(dirData){
+        res.json(dirData);
     });
 })
 
@@ -138,8 +138,8 @@ app.get('/api/shell', function (req, res){
     cd(testSuitePath);
     echo(pwd());
     //exec(command);
-    fileSearching.fileSearching(testSuitePath + '/HTML', '.json').then(function(dir_data){
-        var fileName = dir_data.lastFile;
+    fileSearching.fileSearching(testSuitePath + '/HTML', '.json').then(function(dirData){
+        var fileName = dirData.lastFile;
         var resultFolder = fileName.split('.')[0].replace(':', '-').replace(':', '-');
         fs.copySync(testSuitePath + '/HTML', reportPath + '/HTML', {overwrite: true});
         console.log("File been retrieved -> " + fileName);
@@ -148,7 +148,7 @@ app.get('/api/shell', function (req, res){
         console.log("UT Path: " + mochaPath);
         console.log("UT Report: " + reportPath + '/HTML/' + resultFolder + "/UnitTests");
         fs.copySync(codeCoveragePath, reportPath + '/HTML/' + resultFolder + "/CodeCoverage", {overwrite: true});
-        fs.copySync(mochaPath, reportPath + '/HTML/' + resultFolder + "/UnitTests", {overwrite: true});   
+        fs.copySync(mochaPath, reportPath + '/HTML/' + resultFolder + "/UnitTests", {overwrite: true});
         var json_file = JSON.parse(fs.readFileSync(reportPath +
             '/HTML/' + fileName, 'utf8'));
         testRecord = sortJson(json_file);
@@ -161,7 +161,7 @@ app.get('/api/shell', function (req, res){
         });
         var html = ReactDOMServer.renderToString(element);
         mail.sendEmail('Execution ' + testRecord.timeStamp, html);
-        res.sebd('Success');
+        res.send('Success');
     }, function(err){
         console.log("Error happend -> " + err);
     });
